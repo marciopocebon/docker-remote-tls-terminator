@@ -18,14 +18,14 @@ cat /usr/local/etc/haproxy/haproxy.cfg.template | envsubst > /usr/local/etc/hapr
 
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
-	set -- haproxy "$@"
+  set -- haproxy "$@"
 fi
 
 if [ "$1" = 'haproxy' ]; then
-	# if the user wants "haproxy", let's use "haproxy-systemd-wrapper" instead so we can have proper reloadability implemented by upstream
-	shift # "haproxy"
+  # if the user wants "haproxy", let's use "haproxy-systemd-wrapper" instead so we can have proper reloadability implemented by upstream
+  shift # "haproxy"
   /sbin/syslogd -O /proc/1/fd/1
-	set -- "$(which haproxy-systemd-wrapper)" -p /run/haproxy.pid "$@"
+  set -- "$(which haproxy-systemd-wrapper)" -p /run/haproxy.pid "$@"
 fi
 
 exec "$@"
