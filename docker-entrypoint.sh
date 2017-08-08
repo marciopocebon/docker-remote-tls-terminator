@@ -3,7 +3,7 @@
 set -eo pipefail
 
 if [[ ! "${REMOTE_PORT}" ]]; then
-  REMOTE_PORT="443"
+  export REMOTE_PORT="443"
 fi
 
 if [[ ! "${CERT_NAME}" ]]; then
