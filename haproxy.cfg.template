@@ -1,0 +1,14 @@
+defaults
+  mode tcp
+  option tcplog
+  log /dev/log local0
+  timeout connect 5000ms
+  timeout client 60000ms
+  timeout server 60000ms
+
+frontend http
+  bind *:80
+  default_backend tls
+
+backend tls
+  server srv "${REMOTE_HOST}:${REMOTE_PORT}" ssl verify required verifyhost "${CERT_NAME}" ca-file "${CA_FILE}"
