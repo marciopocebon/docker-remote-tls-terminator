@@ -8,9 +8,10 @@ Usage
 
 ```
 docker run --rm -it \
-        -e REMOTE_HOST=bugcrowd.com \
-        -p 8000:80 \
-    bugcrowd/remote-tls-terminator
+  -e REMOTE_HOST=google.com \
+  -e CERT_NAME=*.google.com \
+  -p 8000:80 \
+  bugcrowd/remote-tls-terminator
 ```
 
 Options
@@ -18,5 +19,5 @@ Options
 
 *   REMOTE_HOST = The remote host you wish to connect to
 *   REMOTE_PORT = The port on the remote host you wish to connect to. Defaults to 443
-*   CERT_NAME = The name on the certificate to verify the host against. Default to REMOTE_HOST
+*   CERT_NAME = The name on the certificate to verify the host against. Defaults to REMOTE_HOST
 *   CA_FILE = A list of Certificate Authorities to verify the certificate against. Defaults to system CA's
