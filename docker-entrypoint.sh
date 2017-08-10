@@ -6,8 +6,8 @@ if [[ ! "${REMOTE_PORT}" ]]; then
   export REMOTE_PORT="443"
 fi
 
-if [[ ! "${CERT_NAME}" ]]; then
-  export CERT_NAME="${REMOTE_HOST}"
+if [[ "${CERT_NAME}" ]]; then
+  export HOST_VERIFICATION="verifyhost \"${CERT_NAME}\""
 fi
 
 if [[ ! "${CA_FILE}" ]]; then

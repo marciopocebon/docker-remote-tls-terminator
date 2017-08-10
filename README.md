@@ -19,5 +19,5 @@ Options
 
 *   REMOTE_HOST = The remote host you wish to connect to
 *   REMOTE_PORT = The port on the remote host you wish to connect to. Defaults to 443
-*   CERT_NAME = The name on the certificate to verify the host against. Defaults to REMOTE_HOST
+*   CERT_NAME = The name on the certificate to verify the host against. If no certificate name is provide no host verification is performed
 *   CA_FILE = A list of Certificate Authorities to verify the certificate against. Defaults to system CA's
