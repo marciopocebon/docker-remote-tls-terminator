@@ -21,3 +21,5 @@ Options
 *   REMOTE_PORT = The port on the remote host you wish to connect to. Defaults to 443
 *   CERT_NAME = The name on the certificate to verify the host against. If no certificate name is provide no host verification is performed
 *   CA_FILE = A list of Certificate Authorities to verify the certificate against. Defaults to system CA's
+*   SNI_HOSTNAME = The hostname used as the Server Name Indicator. Defaults to REMOTE_HOST
+*   HAPROXY_BACKED_OPTIONS = Override all HAProxy backend options. If this option is set then all other options set are discarded. Defaults to "\"${REMOTE_HOST}:${REMOTE_PORT}\" ssl sni \"${SNI_HOSTNAME}\" verify required ${HOST_VERIFICATION} ca-file \"${CA_FILE}\" no-sslv3 no-tlsv10"

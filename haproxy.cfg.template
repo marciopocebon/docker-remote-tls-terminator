@@ -11,4 +11,4 @@ frontend http
   default_backend tls
 
 backend tls
-  server srv "${REMOTE_HOST}:${REMOTE_PORT}" ssl verify required ${HOST_VERIFICATION} ca-file "${CA_FILE}"
+  server srv ${HAPROXY_BACKED_OPTIONS}
