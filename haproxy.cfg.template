@@ -1,6 +1,6 @@
 defaults
-  mode tcp
-  option tcplog
+  mode http
+  option httplog
   log /dev/log local0
   timeout connect 5000ms
   timeout client 60000ms
@@ -8,6 +8,7 @@ defaults
 
 frontend http
   bind *:80
+  monitor-uri /healthcheck/haproxy
   default_backend tls
 
 backend tls
