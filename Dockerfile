@@ -9,5 +9,5 @@ COPY haproxy.cfg.template /usr/local/etc/haproxy/haproxy.cfg.template
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 EXPOSE 80
 
-CMD ["haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg", "-d"]
+CMD ["haproxy", "-f", "/usr/local/etc/haproxy/tmp/haproxy.cfg", "-d"]
 ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]
