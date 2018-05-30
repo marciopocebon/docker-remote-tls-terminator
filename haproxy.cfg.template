@@ -1,15 +1,18 @@
 defaults
-  mode http
-  option httplog
   log /dev/log local0
   timeout connect 5000ms
   timeout client 60000ms
   timeout server 60000ms
 
-frontend http
-  bind *:80
-  monitor-uri /healthcheck/haproxy
-  default_backend tls
+${HEALTHCHECK_BLOCK}
 
-backend tls
+frontend tls_tunnel
+  mode ${PROXY_MODE}
+  option ${PROXY_MODE}log
+  bind *:${BIND_TUNNEL_PORT}
+  default_backend tls_backend
+  ${HEALTHCHECK_INLINE}
+
+backend tls_backend
+  mode ${PROXY_MODE}
   server srv ${HAPROXY_BACKED_OPTIONS}
