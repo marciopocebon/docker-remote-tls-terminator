@@ -6,6 +6,31 @@ if [[ ! "${REMOTE_PORT}" ]]; then
   export REMOTE_PORT="443"
 fi
 
+if [[ ! "${BIND_TUNNEL_PORT}" ]]; then
+  export BIND_TUNNEL_PORT="80"
+fi
+
+if [[ ! "${PROXY_MODE}" ]]; then
+  export PROXY_MODE="http"
+fi
+
+if [[ "${HEALTHCHECK}" ]]; then
+  if [[ "${PROXY_MODE}" == "tcp" ]]; then
+    export HEALTHCHECK_BLOCK="$(cat <<EOF
+frontend healthcheck
+  mode http
+  option httplog
+  bind *:79
+  monitor-uri ${HEALTHCHECK}
+EOF
+)"
+  fi
+
+  if [[ "${PROXY_MODE}" == "http" ]]; then
+    export HEALTHCHECK_INLINE="monitor-uri ${HEALTHCHECK}"
+  fi
+fi
+
 if [[ "${CERT_NAME}" ]]; then
   export HOST_VERIFICATION="verifyhost \"${CERT_NAME}\""
 fi

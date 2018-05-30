@@ -18,8 +18,11 @@ Options
 -------
 
 *   REMOTE_HOST = The remote host you wish to connect to
-*   REMOTE_PORT = The port on the remote host you wish to connect to. Defaults to 443
-*   CERT_NAME = The name on the certificate to verify the host against. If no certificate name is provide no host verification is performed
+*   REMOTE_PORT = The port on the remote host you wish to connect to. Defaults to `443`
+*   BIND_TUNNEL_PORT = The port to bind the tunnel to inside the container. Defaults to `80`
+*   PROXY_MODE = The proxy mode to run HAProxy in. Defaults to `http`. Alternative value is `tcp`
+*   HEALTHCHECK = Healthcheck route (e.g. `/healthcheck/haproxy`). This is a healthcheck for the HAProxy process. Not the upstream service. When run in `http` mode the healthcheck is served inline on the `BIND_TUNNEL_PORT` port. When run in `tcp` mode the healthcheck is served on port `79`. Default is disabled (any value will enable).
+*   CERT_NAME = The name on the certificate to verify the host against. If no certificate name is provided no host verification is performed
 *   CA_FILE = A list of Certificate Authorities to verify the certificate against. Defaults to system CA's
-*   SNI_HOSTNAME = The hostname used as the Server Name Indicator. Defaults to REMOTE_HOST
+*   SNI_HOSTNAME = The hostname used as the Server Name Indicator. Defaults to `REMOTE_HOST`
 *   HAPROXY_BACKED_OPTIONS = Override all HAProxy backend options. If this option is set then all other options set are discarded. Defaults to `"${REMOTE_HOST}:${REMOTE_PORT}" ssl sni "${SNI_HOSTNAME}" verify required ${HOST_VERIFICATION} ca-file "${CA_FILE}" no-sslv3 no-tlsv10`
