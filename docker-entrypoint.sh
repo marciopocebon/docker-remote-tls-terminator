@@ -57,10 +57,8 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 if [ "$1" = 'haproxy' ]; then
-  # if the user wants "haproxy", let's use "haproxy-systemd-wrapper" instead so we can have proper reloadability implemented by upstream
   shift # "haproxy"
-  /sbin/syslogd -O /proc/1/fd/1
-  set -- "$(which haproxy-systemd-wrapper)" -p /run/haproxy.pid "$@"
+  set -- haproxy -W -db "$@"
 fi
 
 exec "$@"
