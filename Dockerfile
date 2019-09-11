@@ -1,4 +1,4 @@
-FROM haproxy:2.0.4-alpine
+FROM haproxy:2.0.5-alpine
 
 RUN apk add --no-cache \
   ca-certificates \

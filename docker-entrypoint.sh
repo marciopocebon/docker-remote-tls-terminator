@@ -45,20 +45,10 @@ fi
 
 # Allow forced override of all haproxy backend settings
 if [[ ! "${HAPROXY_BACKED_OPTIONS}" ]]; then
-  export HAPROXY_BACKED_OPTIONS="\"${REMOTE_HOST}:${REMOTE_PORT}\" ssl sni str(${SNI_HOSTNAME}) verify required ${HOST_VERIFICATION} ca-file \"${CA_FILE}\" no-sslv3 no-tlsv10"
+  export HAPROXY_BACKED_OPTIONS="\"${REMOTE_HOST}:${REMOTE_PORT}\" ssl sni str(${SNI_HOSTNAME}) verify required ${HOST_VERIFICATION} ca-file \"${CA_FILE}\" no-sslv3 no-tlsv10 no-tlsv13"
 fi
 
 mkdir -p /usr/local/etc/haproxy/tmp
 cat /usr/local/etc/haproxy/haproxy.cfg.template | envsubst > /usr/local/etc/haproxy/tmp/haproxy.cfg
-
-# first arg is `-f` or `--some-option`
-if [ "${1#-}" != "$1" ]; then
-  set -- haproxy "$@"
-fi
-
-if [ "$1" = 'haproxy' ]; then
-  shift # "haproxy"
-  set -- haproxy -W -db "$@"
-fi
 
 exec "$@"
