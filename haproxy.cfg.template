@@ -1,5 +1,8 @@
+global
+  log stdout format rfc3164 daemon info
+
 defaults
-  log /dev/log local0
+  log global
   timeout connect 5000ms
   timeout client 60000ms
   timeout server 60000ms

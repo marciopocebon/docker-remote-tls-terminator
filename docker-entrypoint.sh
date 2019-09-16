@@ -45,22 +45,10 @@ fi
 
 # Allow forced override of all haproxy backend settings
 if [[ ! "${HAPROXY_BACKED_OPTIONS}" ]]; then
-  export HAPROXY_BACKED_OPTIONS="\"${REMOTE_HOST}:${REMOTE_PORT}\" ssl sni str(${SNI_HOSTNAME}) verify required ${HOST_VERIFICATION} ca-file \"${CA_FILE}\" no-sslv3 no-tlsv10"
+  export HAPROXY_BACKED_OPTIONS="\"${REMOTE_HOST}:${REMOTE_PORT}\" ssl sni str(${SNI_HOSTNAME}) verify required ${HOST_VERIFICATION} ca-file \"${CA_FILE}\" no-sslv3 no-tlsv10 no-tlsv11"
 fi
 
 mkdir -p /usr/local/etc/haproxy/tmp
 cat /usr/local/etc/haproxy/haproxy.cfg.template | envsubst > /usr/local/etc/haproxy/tmp/haproxy.cfg
-
-# first arg is `-f` or `--some-option`
-if [ "${1#-}" != "$1" ]; then
-  set -- haproxy "$@"
-fi
-
-if [ "$1" = 'haproxy' ]; then
-  # if the user wants "haproxy", let's use "haproxy-systemd-wrapper" instead so we can have proper reloadability implemented by upstream
-  shift # "haproxy"
-  /sbin/syslogd -O /proc/1/fd/1
-  set -- "$(which haproxy-systemd-wrapper)" -p /run/haproxy.pid "$@"
-fi
 
 exec "$@"
