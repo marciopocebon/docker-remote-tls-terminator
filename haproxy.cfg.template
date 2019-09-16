@@ -14,5 +14,4 @@ frontend tls_tunnel
   ${HEALTHCHECK_INLINE}
 
 backend tls_backend
-  mode ${PROXY_MODE}
   server srv ${HAPROXY_BACKED_OPTIONS}
