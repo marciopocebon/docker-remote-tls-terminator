@@ -45,7 +45,7 @@ fi
 
 # Allow forced override of all haproxy backend settings
 if [[ ! "${HAPROXY_BACKED_OPTIONS}" ]]; then
-  export HAPROXY_BACKED_OPTIONS="\"${REMOTE_HOST}:${REMOTE_PORT}\" ssl sni str(${SNI_HOSTNAME}) verify required ${HOST_VERIFICATION} ca-file \"${CA_FILE}\" no-sslv3 no-tlsv10 no-tlsv13"
+  export HAPROXY_BACKED_OPTIONS="\"${REMOTE_HOST}:${REMOTE_PORT}\" ssl sni str(${SNI_HOSTNAME}) verify required ${HOST_VERIFICATION} ca-file \"${CA_FILE}\" no-sslv3 no-tlsv10"
 fi
 
 mkdir -p /usr/local/etc/haproxy/tmp

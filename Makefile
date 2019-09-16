@@ -4,7 +4,10 @@ rmi:
 	docker rmi bugcrowd/remote-tls-terminator || true
 
 build:
-	docker build -t bugcrowd/remote-tls-terminator:2.0.5 .
+	docker build -t bugcrowd/remote-tls-terminator:0.1.0 .
 
 push:
-	docker push bugcrowd/remote-tls-terminator:2.0.5
+	docker push bugcrowd/remote-tls-terminator:0.1.0
+
+production: 
+	docker push bugcrowd/remote-tls-terminator:latest
